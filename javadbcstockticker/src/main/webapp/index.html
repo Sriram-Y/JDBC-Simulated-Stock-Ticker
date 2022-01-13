@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+
+    Copyright (c) 2014 Oracle and/or its affiliates. All rights reserved.
+
+    You may not modify, use, reproduce, or distribute this software except in
+    compliance with  the terms of the License at:
+    https://github.com/javaee/tutorial-examples/LICENSE.txt
+
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Cars for Sale</title>
+  <link rel="stylesheet" type="text/css" href="resources/css/default.css" />
+  <script type="text/javascript">
+      var ajaxRequest;
+      function updatePage() {
+          if (ajaxRequest.readyState === 4) {
+              var arraypv = ajaxRequest.responseText.split("/");
+              document.getElementById("id").innerHTML = arraypv[0];
+              document.getElementById("vin").innerHTML = arraypv[1];
+              document.getElementById("make").innerHTML = arraypv[2];
+              document.getElementById("model").innerHTML = arraypv[3];
+              document.getElementById("year").innerHTML = arraypv[4];
+              document.getElementById("color").innerHTML = arraypv[5];
+              makeAjaxRequest();
+          }
+      }
+      function makeAjaxRequest() {
+          ajaxRequest = new XMLHttpRequest();
+          ajaxRequest.onreadystatechange = updatePage;
+          ajaxRequest.open("GET", "http://localhost:8080/cmis440finalproject/cmis440finalproject", true);
+          ajaxRequest.send(null);
+      }
+  </script>
+</head>
+<body onload="makeAjaxRequest();">
+    <h1>Cars for sale</h1>
+    <table>
+        <tr>
+            <th>IDdsf</th>
+            <th>VIN</th>
+            <th>MAKE</th>
+            <th>MODEL</th>
+            <th>YEAR</th>
+            <th>COLOR</th>
+        </tr>
+        <tr>
+            <td id="id" align="right">--</td>
+            <td id="vin" align="right">--</td>
+            <td id="make" align="right">--</td>
+            <td id="model" align="right">--</td>
+            <td id="year" align="right">--</td>
+            <td id="color" align="right">--</td>
+        </tr>
+    </table>
+</body>
+</html>
